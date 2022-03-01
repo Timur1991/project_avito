@@ -60,6 +60,15 @@ def get_content(html):
             'Район': block.find('div', class_=re.compile('geo-root')).get_text(strip=True),
             'Ссылка': 'https://www.avito.ru/' + block.find('a', class_=re.compile('link-link')).get('href'),
         })
+        # запись в txt файл
+        # name = block.find('h3', class_=re.compile('title-root')).get_text(strip=True)
+        # price = block.find('span', class_=re.compile('price-text')).get_text(strip=True).replace('₽', '').replace(
+        #         '\xa0', '')
+        # city = block.find('a', class_=re.compile('link-link')).get('href').split('/')[1]
+        # district = block.find('div', class_=re.compile('geo-root')).get_text(strip=True)
+        # link = 'https://www.avito.ru/' + block.find('a', class_=re.compile('link-link')).get('href')
+        # with open('data.txt', 'a', encoding='UTF-8') as file:
+        #     file.write(f'{name} | {price} | {city} | {district} | {link}\n')
     return data
 
 
@@ -70,7 +79,7 @@ def parse(url):
     html = get_html(url,
                     params={'bt': 1, 'pmax': max_price, 'pmin': min_price, 'q': search, 's': '2', 'view': 'gallery'})
     soup = BeautifulSoup(html.text, 'lxml')
-    print(soup.h1.get_text())
+    # print(soup.h1.get_text())
     print('Ссылка со всеми параметрами:\n', html.url)
     print('Статус код сайта: ', html.status_code)
     data = []
