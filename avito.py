@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from pandas import ExcelWriter
 
-
+"""данный парсер не работает, воспользуйтесь"""
 # info парсинг авито с сохранением в эксель
 # сделал сбор основных данных, название-цена-город-район-ссылка
 
@@ -25,9 +25,26 @@ from pandas import ExcelWriter
 def get_html(url, params=None):
     """ получение кода страницы """
     headers = {
-        "Accept": "*/*",
-        "Accept-Language": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0",
+        # "Accept": "*/*",
+        # "Accept-Language": "ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3",
+        # "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0",
+    # 'path': '/api/2296/envelope/?sentry_key=f1cfe913d6f44732a4b1601444eccb74&sentry_version=7',
+    # 'Host': 'sntr.avito.ru',
+    'authority': 'm.avito.ru',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) Gecko/20100101 Firefox/92.0',
+    'Accept': '*/*',
+    'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    # 'Accept-Encoding': 'gzip, deflate, br',
+    # 'Referer': 'https://www.avito.ru/',
+    'Content-Type': 'text/plain;charset=UTF-8',
+    # 'Origin': 'https://www.avito.ru',
+    # 'Content-Length': '421',
+    'Connection': 'keep-alive',
+    # 'browser_data':	"n4v6Vl91VGNPWW9SOTFwRFBlQ0xrZTRjaTh4RiUyQnlUdVJNelhUSiUyQnJQQ1N3OTRHRGVObkJ3QXVBb0hja1hnYmhTeUJheHQxeFFsQTcyRE1SUCUyQkRBY3gxTlRiUSUzRCUzRA",
+    #
+    # "cookie": "u=2owat9ra.14ibdnc.5en8flsun6c0; buyer_location_id=646600",
+    # "authority": "passport.aliexpress.com",
+    "sec-ch-ua": "^\^"
     }
     html = requests.get(url, headers=headers, params=params)
     return html
@@ -116,4 +133,7 @@ def save_excel(data, file_name):
 
 
 if __name__ == "__main__":
-    parse("https://www.avito.ru/")
+    # parse("https://www.avito.ru/")
+
+    r = get_html('https://m.avito.ru/')
+    print(r.status_code)
